@@ -1,12 +1,3 @@
-# from django.shortcuts import render
-
-# # Create your views here.
-# from rest_framework import generics, permissions
-# from rest_framework.response import Response
-# from rest_framework.views import APIView
-# from rest_framework_simplejwt.tokens import RefreshToken
-# from django.contrib.auth.models import User
-# from .serializers import RegisterSerializer
 from django.shortcuts import render
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
@@ -44,13 +35,6 @@ class HomeView(APIView):
 
     def get(self, request):
         return Response({"message": "Welcome to the Home Page!"})
-
-# from rest_framework.permissions import IsAuthenticated
-# from rest_framework.response import Response
-# from rest_framework.views import APIView
-# from .models import Profile
-# from .serializers import ProfileSerializer
-# from rest_framework import status
 
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]  # Ensure the user is logged in
@@ -107,8 +91,10 @@ class PainterDashboardView(APIView):
         if not user_profile.is_painter_approved:
             return Response({"detail": "Not authorized"}, status=status.HTTP_403_FORBIDDEN)
 
-        # Fetch any additional data or provide statistics
+        # Fetch only approved paintings
+        approved_paintings = user_profile.paintings.filter(is_approved_for_bidding=True)
+
         return Response({
             "profile": ProfileSerializer(user_profile).data,
-            "paintings": PaintingSerializer(user_profile.paintings.all(), many=True).data
+            "approved_paintings": PaintingSerializer(approved_paintings, many=True).data
         }, status=status.HTTP_200_OK)

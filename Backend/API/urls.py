@@ -9,8 +9,4 @@ urlpatterns = [
     path('profile/become_painter/', ApplyToBecomePainterView.as_view(), name='apply_become_painter'),
     path('paintings/', PaintingListCreateView.as_view(), name='paintings'),
     path('dashboard/', PainterDashboardView.as_view(), name='dashboard'),
-
-
-
-
 ]
