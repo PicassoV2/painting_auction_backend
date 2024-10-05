@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config, Csv
 
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-9i_*5vlp(fp15mok55qfg_upsv^*-)+tp0)b@f&%_#suptwv9i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['paintingauctionbackend-production.up.railway.app', 'localhost', '127.0.0.1' ]
 
 
 # Application definition
