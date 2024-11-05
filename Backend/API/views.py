@@ -98,3 +98,10 @@ class PainterDashboardView(APIView):
             "profile": ProfileSerializer(user_profile).data,
             "approved_paintings": PaintingSerializer(approved_paintings, many=True).data
         }, status=status.HTTP_200_OK)
+    
+class PaintingListView(APIView):
+    def get(self, request):
+        paintings = Painting.objects.all()[:10]
+        serializer = PaintingSerializer(paintings, many=True)
+        return Response(serializer.data)
+
