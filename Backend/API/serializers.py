@@ -29,5 +29,5 @@ class ProfileSerializer(serializers.ModelSerializer):
 class PaintingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Painting
-        fields = ['id', 'title', 'description', 'image']
+        fields = ['id', 'title', 'description', 'image', 'is_approved_for_bidding', 'profile', 'category']
 

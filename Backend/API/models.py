@@ -16,9 +16,10 @@ class Painting(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="paintings")
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to='paintings/')
+    image = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
-    is_approved_for_bidding = models.BooleanField(default=False)  # New field to approve for bidding
+    is_approved_for_bidding = models.BooleanField(default=False)
+    category = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
