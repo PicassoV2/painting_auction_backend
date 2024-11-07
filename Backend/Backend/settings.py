@@ -42,9 +42,18 @@ INSTALLED_APPS = [
     'rest_framework',
     'API',
     'corsheaders',
+    'cloudinary',
 ]
 
 CSRF_TRUSTED_ORIGINS = ['https://paintingauctionbackend-production.up.railway.app']
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dqlawzmnl',
+    'API_KEY': '352264151862638',
+    'API_SECRET': 'e_sRAfOhlSK04QFUIndzgur9U1U',
+}
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from .serializers import RegisterSerializer, ProfileSerializer, PaintingSerializer
 from .models import Profile, Painting
 from rest_framework.permissions import IsAuthenticated
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 
 class RegisterView(generics.CreateAPIView):
@@ -105,3 +106,19 @@ class PaintingListView(APIView):
         serializer = PaintingSerializer(paintings, many=True)
         return Response(serializer.data)
 
+class UploadImageView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        image = request.FILES['image']
+        storage = MediaCloudinaryStorage()
+        image_url = storage.url(storage.save(image.name, image))
+        painting = Painting(
+            title=request.data['title'],
+            description=request.data['description'],
+            image=image_url,
+            category=request.data['category'],
+            profile=request.user.profile
+        )
+        painting.save()
+        serializer = PaintingSerializer(painting)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
