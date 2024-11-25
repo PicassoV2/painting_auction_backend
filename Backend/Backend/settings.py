@@ -163,4 +163,5 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://paintingauctionfrontend.up.railway.app",
+    "https://picassofrontendnext-copy-1-production.up.railway.app",
 ]
